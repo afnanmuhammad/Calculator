@@ -1,24 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
+import Styles from "./App.Module.css";
+import Display from './Components/Display';
+import ButtonContainer from "./Components/ButtoContainer.jsx";
+import { useState } from "react";
+// import { Button } from "bootstrap";
 
 function App() {
+  // =======================Calculator Codeing ================================= 
+  const [currentValue, setCurrentValue] = useState("");
+  const onButtonClick = (buttonText) => {
+    if (buttonText === "C") {
+      setCurrentValue(" ");
+    } else if (buttonText === "=") {
+      const result = eval(currentValue);
+      setCurrentValue(result);
+    } else {
+      const newDispaly = currentValue + buttonText;
+      setCurrentValue(newDispaly);
+
+    }
+  };
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <center>
+      <div className="calculator">
+        <Display displayValue={currentValue} />
+        <ButtonContainer onButtonClick={onButtonClick} />
+      </div>
+    </center>
+
   );
 }
 
